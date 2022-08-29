@@ -1,0 +1,33 @@
+<messaging:emailTemplate recipientType="Contact"
+    relatedToType="Account"
+    subject="Case report for Account: {!relatedTo.name}"
+    replyTo="contact@asagarwal.com">
+
+    <messaging:htmlEmailBody >
+        <html>
+            <body>
+            <p>Dear {!relatedTo.Primary_Contact__r.FirstName},</p>
+            <p>Below is a list of cases related to {!relatedTo.name}.</p>
+            <table border="0" >
+                <tr>
+                    <th>Case Number</th>
+                    <th>Subject</th>
+                    <th>Origin</th>
+                    <th>Creator Email</th>
+                    <th>Status</th>
+                </tr>
+                <apex:repeat var="cx" value="{!relatedTo.Cases}">
+                <tr>
+                    <td>{!cx.CaseNumber}</td>
+                    <td>{!cx.Subject}</td>
+                    <td>{!cx.Origin}</td>
+                    <td>{!cx.Contact.email}</td>
+                    <td>{!cx.Status}</td>
+                </tr>
+                </apex:repeat> 
+            </table>
+            <p>If you need any further information or clarification, please email us at contact@asagarwal.com</p>
+            </body>
+        </html>
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>
